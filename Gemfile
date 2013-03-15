@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.beta1'
-
-gem 'sqlite3'
+gem 'rails', '~> 4.0.0.beta1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -19,20 +16,24 @@ end
 
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'haml-rails'
+gem 'twitter-bootstrap-rails'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.0.1'
+gem 'puma'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'resque', '~> 1.23'
+gem 'faraday', require: false
+gem 'aws-sdk', require: false
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :development, :test do
+  gem 'sqlite3'
+  gem 'rspec-rails'
+end
 
-# Deploy with Capistrano
-# gem 'capistrano', group: :development
+group :test do
+  gem 'coveralls', require: false
+end
 
-# To use debugger
-# gem 'debugger'
+group :production do
+  gem 'mysql2'
+end
