@@ -8,3 +8,6 @@ rails_env = Rails.env || 'development'
 
 resque_config = YAML.load_file(rails_root.to_s + '/config/resque.yml')
 Resque.redis = resque_config[rails_env]
+
+Resque.redis.namespace = 'higgins:resque'
+Resque.logger.sev_threshold = Logger::INFO
