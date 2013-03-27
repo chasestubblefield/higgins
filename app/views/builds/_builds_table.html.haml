@@ -1,0 +1,14 @@
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Id
+      %th Name
+      %th Ref
+      %th Created at
+  %tbody(data-provides="rowlink")
+    - builds.each do |build|
+      %tr
+        %td= link_to build.id, build_path(build)
+        %td= build.name
+        %td= build.ref
+        %td=l build.created_at if build.created_at

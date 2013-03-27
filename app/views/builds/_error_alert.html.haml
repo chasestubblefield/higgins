@@ -1,0 +1,7 @@
+.alert.alert-error
+  %ul.unstyled
+    %li= error.class.to_s
+    %li= error.message
+    - if error.backtrace
+      - error.backtrace.each do |line|
+        %li= line

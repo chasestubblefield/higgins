@@ -1,0 +1,31 @@
+.page-header
+  %h1= "Build #{@build.id}"
+
+.row-fluid
+  .span9
+    %dl.dl-horizontal
+      - [:name, :ref].each do |a|
+        %dt= Build.human_attribute_name(a)
+        %dd= @build.public_send(a)
+  .span3
+    = link_to 'Enqueue', enqueue_build_path(@build), class: 'btn btn-block'
+
+- if @build.error.is_a? Exception
+  = render partial: 'error_alert', locals: {error: @build.error}
+
+- job_count = @build.jobs.length
+- if job_count > 0
+  - statuses = @build.jobs.map(&:status)
+  - success_percent = (100 * statuses.count{ |s| s == 'success' } / job_count).round
+  - failure_percent = (100 * statuses.count { |s| s == 'failure' } / job_count).round
+  - error_percent = (100 * statuses.count { |s| s == 'error' } / job_count).round
+  .progress
+    - if success_percent > 0
+      .bar.bar-success{style: "width: #{success_percent}%"}
+    - if failure_percent > 0
+      .bar.bar-danger{style: "width: #{failure_percent}%"}
+    - if error_percent > 0
+      .bar.bar-warning{style: "width: #{error_percent}%"}
+
+
+= render partial: 'jobs_list', locals: {jobs: @build.jobs}

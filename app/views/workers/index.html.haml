@@ -1,0 +1,9 @@
+.page-header
+  %h1= pluralize(@workers.count, 'Worker')
+
+%dl.dl-horizontal
+  - [:working, :idle].each do |state|
+    %dt= state.to_s.titleize
+    %dd= @workers.count { |w| w.state == state }
+
+= render partial: 'workers_table', locals: {workers: @workers}

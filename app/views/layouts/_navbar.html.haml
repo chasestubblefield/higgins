@@ -1,0 +1,20 @@
+.navbar.navbar-static-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Higgins', root_path, class: 'brand'
+      .container.nav-collapse
+        %ul.nav
+          - [["Builds", builds_path], ["Workers", workers_path]].each do |text, href|
+            %li{class: ('active' if current_page?(href))}
+              = link_to text, href
+        %ul.nav.pull-right
+          %li.navbar-text= Higgins::Application.config.project['name']
+          - if Higgins::Application.config.github
+            - if @authenticated
+              %li= link_to 'Logout', auth_logout_path
+            - else
+              %li= link_to 'Login in GitHub', auth_login_path

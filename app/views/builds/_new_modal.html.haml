@@ -1,0 +1,16 @@
+#new.modal.hide.fade(tabindex="-1")
+  .modal-header
+    %button.close(tabindex="-1" data-dismiss="modal") &times;
+    %h3 New Build
+  .modal-body
+    = form_for Build.new, html: {class: 'form-horizontal'} do |f|
+      - [:name, :ref].each do |attribute|
+        .control-group{class: ('error' unless f.object.errors[attribute].empty?) }
+          = f.label attribute, class: 'control-label'
+          .controls
+            = f.text_field attribute, class: 'text_field'
+            - unless f.object.errors[attribute].empty?
+              %span.help-inline= f.object.errors[attribute].join(';')
+      .form-actions
+        %a.btn(data-dismiss="modal") Close
+        = f.submit nil, class: 'btn btn-primary'

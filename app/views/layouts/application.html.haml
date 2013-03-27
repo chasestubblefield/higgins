@@ -1,0 +1,28 @@
+!!! 5
+%html(lang="en")
+  %head
+    = render partial: 'layouts/meta'
+
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+
+    = stylesheet_link_tag "application", :media => "all"
+
+    = render partial: 'layouts/favicons'
+
+  %body
+    = render partial: 'layouts/navbar'
+
+    .container
+      %p= bootstrap_flash
+      #main= yield
+
+      - if controller.class.polling?
+        = render partial: 'layouts/polling'
+
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"

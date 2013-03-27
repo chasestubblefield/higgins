@@ -1,0 +1,21 @@
+.pagination.pagination-centered
+  %ul
+    - if page == 1
+      %li.disabled= link_to '«', '#'
+    - else
+      %li= link_to '«', builds_path(page: page - 1)
+    - if page > 2
+      %li= link_to (page - 2), builds_path(page: page - 2)
+    - if page > 1
+      %li= link_to (page - 1), builds_path(page: page - 1)
+    %li.active= link_to page, '#'
+    %li= link_to (page + 1), builds_path(page: page + 1)
+    %li= link_to (page + 2), builds_path(page: page + 2)
+    - unless page > 1
+      %li= link_to (page + 3), builds_path(page: page + 3)
+    - unless page > 2
+      %li= link_to (page + 4), builds_path(page: page + 4)
+    - if last_page
+      %li.disabled= link_to '»', '#'
+    - else
+      %li= link_to '»', builds_path(page: page + 1)
