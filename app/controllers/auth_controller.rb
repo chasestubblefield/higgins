@@ -1,3 +1,5 @@
+require 'faraday'
+
 class AuthController < ApplicationController
 
   def login

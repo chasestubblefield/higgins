@@ -7,7 +7,7 @@ module Jobs
     def self.perform(build_id)
       build = Build.find_by_id!(build_id)
       workspace = Workspace.new(build.ref)
-        workspace.logger = Logger.new(STDOUT)
+      workspace.logger = Logger.new(STDOUT)
 
       commands =
         workspace.specs.map { |s| "rspec --failure-exit-code 2 #{s}" } +

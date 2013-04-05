@@ -4,7 +4,7 @@ require 'jobs/builder'
 describe Jobs::Builder do
 
   describe '#perform' do
-    pending 'should create jobs for each spec and feature' do
+    it 'should create jobs for each spec and feature' do
       build = Factory.build
       Jobs::Builder.perform(build.id)
       build.reload
